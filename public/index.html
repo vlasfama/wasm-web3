@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Smart Contract</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./container.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <h3>Wasm Erc20 Token</h1>
+            </div>
+            <div class="col-md-4"></div>
+
+        </div>
+    </div>
+    </br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4 shadow-none p-3 mb-5 bg-light rounded">
+                <div class="container">
+
+                    <div id="login-row" class="row justify-content-center align-items-center">
+                        <div id="login-box" class="col-md-12">
+                            <h3 class="text-center text-info">Token Deploy</h3>
+                            <div class="form-group">
+                                <label class="text-info">From Address:</label><br>
+                                <input type="text" class="form-control" id="txt_from" placeholder="From address">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-info">Contract Output:</label><br>
+                                <input type="text" id="txtcontract_output" class="form-control">
+                            </div>
+                            <button class="btn btn-success" type="button" onclick="deploy()">Deploy</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4 shadow-none p-3 mb-5 bg-light rounded">
+                <div class="container">
+                    <div id="login-row" class="row justify-content-center align-items-center">
+
+                        <div id="login-box" class="col-md-12">
+
+                            <h3 class="text-center text-info">Total Supply</h3>
+                            <div class="form-group">
+                                <label class="text-info">Contract Address:</label><br>
+                                <input type="text" class="form-control" id="txt_contractAddress"
+                                    placeholder="Contract address">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-info">Output:</label><br>
+                                <input type="text" id="txttotalsupply_output" class="form-control">
+                            </div>
+                            <button class="btn btn-success" type="button" onclick="Totalsupply()">Totalsupply</button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+
+    </br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4 shadow-none p-3 mb-5 bg-light rounded">
+                <div class="container">
+
+                    <div id="login-row" class="row justify-content-center align-items-center">
+                        <div id="login-box" class="col-md-12">
+                            <h3 class="text-center text-info">Transfer</h3>
+                            <div class="form-group">
+                                <label class="text-info">Contract Address:</label><br>
+                                <input type="text" class="form-control" id="txt_contract"
+                                    placeholder="contract_address">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-info">To Address:</label><br>
+                                <input type="text" class="form-control" id="txt_toAddress" placeholder="To address">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-info">Amount:</label><br>
+                                <input type="text" class="form-control" id="txt_amount" placeholder="amount">
+                            </div>
+                            <div class="form-group">
+                                <label class="text-info">Output:</label><br>
+                                <input type="text" id="txt_sendoutput" class="form-control">
+                            </div>
+                            <button class="btn btn-success" type="button" onclick="Send()">Transfer</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4 shadow-none p-3 mb-5 bg-light rounded">
+                <div class="container">
+                    <div id="login-row" class="row justify-content-center align-items-center">
+
+                        <div id="login-box" class="col-md-12">
+
+                            <h3 class="text-center text-info">Balance</h3>
+                            <div class="form-group">
+                                <label class="text-info">Contract Address:</label><br>
+                                <input type="text" class="form-control" id="txt_caddress"
+                                    placeholder="contract address">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="text-info">From Address:</label><br>
+                                <input type="text" class="form-control" id="txt_fromaddr" placeholder="From address">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="text-info">Output:</label><br>
+                                <input type="text" id="txt_balance" class="form-control">
+                            </div>
+                            <button class="btn btn-success" type="button" onclick="balanceOf()">Balance</button>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+
+
+    <script text="type/javascript">
+
+        function init() {
+            document.getElementById("txtcontract_output").value = "";
+            document.getElementById("txttotalsupply_output").value = "";
+            document.getElementById("txt_sendoutput").value = "";
+            document.getElementById("txt_balance").value = "";
+        }
+
+        function deploy() {
+            var fromAddress = document.getElementById("txt_from").value;
+            $.ajax({
+                url: "http://localhost:8080/api/deploycontract/",
+                type: "POST",
+                crossDomain: true,
+                data: JSON.stringify({ from: fromAddress }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    document.getElementById("txtcontract_output").value = data.contract;
+                },
+                error: function (xhr, status) {
+                }
+            });
+        }
+
+        function balanceOf() {
+            var from_addr = document.getElementById("txt_fromaddr").value;
+            var ca = document.getElementById("txt_caddress").value;
+            console.log("the contract value", ca)
+            console.log("the contract value", from_addr)
+            $.ajax({
+                url: "http://localhost:8080/api/balanceof/",
+                type: "POST",
+                crossDomain: true,
+                data: JSON.stringify({ contract: ca, from: from_addr }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    document.getElementById("txt_balance").value = data.balance;
+                },
+                error: function (xhr, status) {
+                }
+            });
+        }
+
+        function Totalsupply() {
+            // Selecting the input element and get its value
+            var ca = document.getElementById("txt_contractAddress").value;
+            $.ajax({
+                url: "http://localhost:8080/api/gettotalSupply/",
+                type: "POST",
+                crossDomain: true,
+                data: JSON.stringify({ contract: ca }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    document.getElementById("txttotalsupply_output").value = data.totalsupply;
+                },
+                error: function (xhr, status) {
+                }
+            });
+        }
+
+        function Send() {
+            // Selecting the input element and get its value
+            var ca = document.getElementById("txt_contract").value;
+            var to_address = document.getElementById("txt_toAddress").value;
+            var amt = document.getElementById("txt_amount").value;
+            $.ajax({
+                url: "http://localhost:8080/api/transfer/",
+                type: "POST",
+                crossDomain: true,
+                data: JSON.stringify({ contract: ca, to: to_address, amount: amt }),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    document.getElementById("txt_sendoutput").value = data.status;
+                },
+                error: function (xhr, status) {
+                }
+            });
+        }
+
+
+
+        window.onload = init;
+    </script>
+</body>
+
+</html>
